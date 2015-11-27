@@ -1,22 +1,219 @@
-= Teste
+= Load itextpdf, simplecaptcha, apache poi, rome, omnifaces and primefaces as JBoss AS/Wildfly Modules
 
-_Itálico_
+In order to reduce your applications package size, JBoss AS/Wildfly allows you to add libraries as modules, so you don't need to include them with the application. Instead your application will use the libraries provided in `[JBOSS_HOME]/modules`.
 
-*Negrito*
+== 1. Create the following directory structure in `[JBOSS_HOME]/modules`
 
-`plain text`
+* modules/
+**  com
+*** itextpdf
+**** itextpdf
+***** main
+****** itextpdf-5.5.0.jar
+****** itext-xtra-5.5.0.jar
+****** module.xml
+*** rome
+**** main
+***** module.xml
+***** rome-1.0.jar
+*** nl
+**** captcha
+***** simplecaptcha
+****** main
+******* module.xml
+******* simplecaptcha-1.2.1.jar
+*** org
+**** apache
+***** commons
+****** fileupload
+****** main
+******* commons-fileupload-1.3.1.jar
+******* module.xml
+*** poi
+**** main
+***** module.xml
+***** poi-3.10-FINAL.jar
+*** omnifaces
+**** main
+***** module.xml
+***** omnifaces-1.7.jar
+*** primefaces
+**** main
+***** module.xml
+***** primefaces-5.0.jar
 
+=== Itextpdf module.xml:
+
+[source,xml]
+<?xml version="1.0" encoding="UTF-8"?>
+<module xmlns="urn:jboss:module:1.1" name="com.itextpdf.itextpdf">
+    <resources>
+        <resource-root path="itextpdf-5.5.0.jar"/>
+        <resource-root path="itext-xtra-5.5.0.jar"/>
+    </resources>
+</module>
+
+=== Rome module.xml:
 [source,xml]
 <?xml version="1.0" encoding="UTF-8"?>
 <module xmlns="urn:jboss:module:1.1" name="com.rome">
     <resources>
         <resource-root path="rome-1.0.jar"/>
     </resources>
+
     <dependencies>
         <module name="org.jdom" export="true"/>
         <module name="javax.api" export="true"/>
     </dependencies>
 </module>
 
-[source,ruby]
-puts "Hello, World!"
+=== Simplecaptcha module.xml:
+[source,xml]
+<?xml version="1.0" encoding="UTF-8"?>
+<module xmlns="urn:jboss:module:1.1" name="nl.captcha.simplecaptcha">
+    <resources>
+        <resource-root path="simplecaptcha-1.2.1.jar"/>
+    </resources>
+</module>
+
+=== Apache Commons Fileupload module.xml:
+[source,xml]
+<?xml version="1.0" encoding="UTF-8"?>
+<module xmlns="urn:jboss:module:1.1" name="org.apache.commons.fileupload">
+    <resources>
+        <resource-root path="commons-fileupload-1.3.1.jar"/>
+    </resources>
+    <dependencies>
+ <module name="javax.servlet.api" />
+ <module name="org.apache.commons.io" />
+    </dependencies>
+</module>
+
+=== Apache Poi module.xml:
+[source,xml]
+<?xml version="1.0" encoding="UTF-8"?>
+<module xmlns="urn:jboss:module:1.1" name="org.apache.poi">
+    <resources>
+        <resource-root path="poi-3.10-FINAL.jar"/>
+    </resources>
+</module>
+
+=== Omnifaces module.xml:
+[source,xml]
+<?xml version="1.0" encoding="UTF-8"?>
+<module xmlns="urn:jboss:module:1.1" name="org.omnifaces">
+    <resources>
+        <resource-root path="omnifaces-1.7.jar"/>
+    </resources>
+    <dependencies>
+        <module name="javaee.api"/>
+        <module name="javax.api"/>
+        <module name="javax.faces.api" />
+    </dependencies>
+</module>
+
+=== Warning 
+From my experience, a few Omnifaces features, like ViewParam and Highlight, won't work when it's included in your project as a JBoss module. I didn't find a workaround for that yet, so if that happens to you just change Omnifaces dependency scope from provided to compile.
+
+=== Primefaces module.xml:
+[source,xml]
+<?xml version="1.0" encoding="UTF-8"?>
+<module xmlns="urn:jboss:module:1.1" name="org.primefaces">
+    <dependencies>
+  <module name="javax.api" export="true" />
+        <module name="javax.faces.api" export="true" />
+        <module name="org.apache.commons.fileupload" export="true" />
+    </dependencies>
+    <resources>
+        <resource-root path="primefaces-5.0.jar"/>
+    </resources>
+</module>
+
+== 2. Change the Maven Dependency Scope from Compile to Provided
+
+
+pom.xml:
+[source,xml]
+        <dependency>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>itextpdf</artifactId>
+            <version>5.5.0</version>
+            <type>jar</type>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>itext-xtra</artifactId>
+            <version>5.5.0</version>
+            <type>jar</type>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>rome</groupId>
+            <artifactId>rome</artifactId>
+            <version>1.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>nl.captcha</groupId>
+            <artifactId>simplecaptcha</artifactId>
+            <version>1.2.1</version>
+            <type>jar</type>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.10-FINAL</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.omnifaces</groupId>
+            <artifactId>omnifaces</artifactId>
+            <version>1.7</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
+            <version>5.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+== 3. Enable the dependencies in your project
+
+There are two ways (and a mix of both):
+
+Add the jboss-deployment-structure.xml to your project's WEB-INF folder:
+[source,xml]
+<jboss-deployment-structure>
+    <deployment>
+        <dependencies>
+            <module name="nl.captcha.simplecaptcha"/>
+            <module name="com.itextpdf.itextpdf"/>
+            <module name="com.rome"/>
+            <module name="org.apache.poi"/>
+            <module name="org.omnifaces" meta-inf="export"/>
+            <module name="org.primefaces" meta-inf="export"/>
+        </dependencies>
+        <resources>
+            <resource-root path="."/>
+        </resources>
+    </deployment>
+</jboss-deployment-structure>
+
+Or instead add the following code to your standalone or domain.xml to enable those dependencies globally to every deployed application:
+[source,xml]
+<subsystem xmlns="urn:jboss:domain:ee:1.0" >            
+  <global-modules>
+    <module name="nl.captcha.simplecaptcha"/>
+    <module name="com.itextpdf.itextpdf"/>
+    <module name="com.rome"/>  
+  </global-modules> 
+</subsystem>
+
+The disadvantage of global-modules is that you can't use the meta-inf property. So if you need to export it (as in omnifaces and primefaces case), you'll be forced to use the jboss-deployment-structure.xml file.
+
+You can also use both methods. Add the libraries used by all your projects as global modules and the less used ones in the jboss-deployment-structure.xml.
+
+I hope those examples help you to set up any other library you need. If not, please comment this post, then I'll try to help you.
