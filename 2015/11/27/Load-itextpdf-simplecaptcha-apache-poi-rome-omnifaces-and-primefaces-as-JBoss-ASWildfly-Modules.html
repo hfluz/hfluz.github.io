@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title>Load itextpdf, simplecaptcha, apache poi, rome, omnifaces and primefaces as JBoss AS/Wildfly Modules</title>
+    <meta name="description" content="" />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="//hfluz.github.io/themes/Casper/favicon.ico">
+
+    <link rel="stylesheet" type="text/css" href="//hfluz.github.io/themes/Casper/assets/css/screen.css?v=1.0.0" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+
+    <link rel="canonical" href="https://hfluz.github.io/2015/11/27/Load-itextpdf-simplecaptcha-apache-poi-rome-omnifaces-and-primefaces-as-JBoss-ASWildfly-Modules.html" />
+    
+    <meta property="og:site_name" content="hfluz" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Load itextpdf, simplecaptcha, apache poi, rome, omnifaces and primefaces as JBoss AS/Wildfly Modules" />
+    <meta property="og:description" content="In order to reduce your applications package size, JBoss AS/Wildfly allows you to add libraries as modules, so you don&amp;#8217;t need to include them with the application. Instead your application will use the libraries provided in [JBOSS_..." />
+    <meta property="og:url" content="https://hfluz.github.io/2015/11/27/Load-itextpdf-simplecaptcha-apache-poi-rome-omnifaces-and-primefaces-as-JBoss-ASWildfly-Modules.html" />
+    <meta property="article:published_time" content="2015-11-27T02:00:00.000Z" />
+    <meta property="article:modified_time" content="2015-11-27T13:22:23.701Z" />
+    
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Load itextpdf, simplecaptcha, apache poi, rome, omnifaces and primefaces as JBoss AS/Wildfly Modules" />
+    <meta name="twitter:description" content="In order to reduce your applications package size, JBoss AS/Wildfly allows you to add libraries as modules, so you don&amp;#8217;t need to include them with the application. Instead your application will use the libraries provided in [JBOSS_..." />
+    <meta name="twitter:url" content="https://hfluz.github.io/2015/11/27/Load-itextpdf-simplecaptcha-apache-poi-rome-omnifaces-and-primefaces-as-JBoss-ASWildfly-Modules.html" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "publisher": "hfluz",
+    "author": {
+        "@type": "Person",
+        "name": "Humberto Ferreira da Luz Junior",
+        "image": "https://avatars.githubusercontent.com/u/832674?v=3",
+        "url": "undefined/author/undefined",
+        "sameAs": null
+    },
+    "headline": "Load itextpdf, simplecaptcha, apache poi, rome, omnifaces and primefaces as JBoss AS/Wildfly Modules",
+    "url": "https://hfluz.github.io/2015/11/27/Load-itextpdf-simplecaptcha-apache-poi-rome-omnifaces-and-primefaces-as-JBoss-ASWildfly-Modules.html",
+    "datePublished": "2015-11-27T02:00:00.000Z",
+    "dateModified": "2015-11-27T13:22:23.701Z",
+    "description": "In order to reduce your applications package size, JBoss AS/Wildfly allows you to add libraries as modules, so you don&amp;#8217;t need to include them with the application. Instead your application will use the libraries provided in [JBOSS_..."
+}
+    </script>
+
+    <meta name="generator" content="Ghost ?" />
+    <link rel="alternate" type="application/rss+xml" title="hfluz" href="https://hfluz.github.io/rss" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/default.min.css">
+</head>
+<body class="post-template">
+
+    
+
+
+<header class="main-header post-head no-cover">
+    <nav class="main-nav  clearfix">
+        <a class="back-button icon-arrow-left" href="https://hfluz.github.io">Home</a>
+        <!-- <a class="subscribe-button icon-feed" href="https://hfluz.github.io/rss/">Subscribe</a> -->
+    </nav>
+</header>
+
+<main class="content" role="main">
+
+    <article class="post">
+
+        <header class="post-header">
+            <h1 class="post-title">Load itextpdf, simplecaptcha, apache poi, rome, omnifaces and primefaces as JBoss AS/Wildfly Modules</h1>
+            <section class="post-meta">
+                <time class="post-date" datetime="2015-11-27">27 November 2015</time> 
+            </section>
+        </header>
+
+        <section class="post-content">
+            <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>In order to reduce your applications package size, JBoss AS/Wildfly allows you to add libraries as modules, so you don&#8217;t need to include them with the application. Instead your application will use the libraries provided in <code>[JBOSS_HOME]/modules</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_1_create_the_following_directory_structure_in_code_jboss_home_modules_code">1. Create the following directory structure in <code>[JBOSS_HOME]/modules</code></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>modules/</p>
+<div class="ulist">
+<ul>
+<li>
+<p>com</p>
+<div class="ulist">
+<ul>
+<li>
+<p>itextpdf</p>
+<div class="ulist">
+<ul>
+<li>
+<p>itextpdf</p>
+<div class="ulist">
+<ul>
+<li>
+<p>main
+<strong><strong></strong></strong> itextpdf-5.5.0.jar
+<strong><strong></strong></strong> itext-xtra-5.5.0.jar
+<strong><strong></strong></strong> module.xml</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>rome</p>
+<div class="ulist">
+<ul>
+<li>
+<p>main</p>
+<div class="ulist">
+<ul>
+<li>
+<p>module.xml</p>
+</li>
+<li>
+<p>rome-1.0.jar</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>nl</p>
+<div class="ulist">
+<ul>
+<li>
+<p>captcha</p>
+<div class="ulist">
+<ul>
+<li>
+<p>simplecaptcha
+<strong><strong></strong></strong> main
+<strong><strong></strong><strong> module.xml
+</strong><strong></strong></strong> simplecaptcha-1.2.1.jar</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>org</p>
+<div class="ulist">
+<ul>
+<li>
+<p>apache</p>
+<div class="ulist">
+<ul>
+<li>
+<p>commons
+<strong><strong></strong></strong> fileupload
+<strong><strong></strong></strong> main
+<strong><strong></strong><strong> commons-fileupload-1.3.1.jar
+</strong><strong></strong></strong> module.xml</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>poi</p>
+<div class="ulist">
+<ul>
+<li>
+<p>main</p>
+<div class="ulist">
+<ul>
+<li>
+<p>module.xml</p>
+</li>
+<li>
+<p>poi-3.10-FINAL.jar</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>omnifaces</p>
+<div class="ulist">
+<ul>
+<li>
+<p>main</p>
+<div class="ulist">
+<ul>
+<li>
+<p>module.xml</p>
+</li>
+<li>
+<p>omnifaces-1.7.jar</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>primefaces</p>
+<div class="ulist">
+<ul>
+<li>
+<p>main</p>
+<div class="ulist">
+<ul>
+<li>
+<p>module.xml</p>
+</li>
+<li>
+<p>primefaces-5.0.jar</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="_itextpdf_module_xml">Itextpdf module.xml:</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;module xmlns="urn:jboss:module:1.1" name="com.itextpdf.itextpdf"&gt;
+    &lt;resources&gt;
+        &lt;resource-root path="itextpdf-5.5.0.jar"/&gt;
+        &lt;resource-root path="itext-xtra-5.5.0.jar"/&gt;
+    &lt;/resources&gt;
+&lt;/module&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_rome_module_xml">Rome module.xml:</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;module xmlns="urn:jboss:module:1.1" name="com.rome"&gt;
+    &lt;resources&gt;
+        &lt;resource-root path="rome-1.0.jar"/&gt;
+    &lt;/resources&gt;</code></pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>    &lt;dependencies&gt;
+        &lt;module name="org.jdom" export="true"/&gt;
+        &lt;module name="javax.api" export="true"/&gt;
+    &lt;/dependencies&gt;
+&lt;/module&gt;</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_simplecaptcha_module_xml">Simplecaptcha module.xml:</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;module xmlns="urn:jboss:module:1.1" name="nl.captcha.simplecaptcha"&gt;
+    &lt;resources&gt;
+        &lt;resource-root path="simplecaptcha-1.2.1.jar"/&gt;
+    &lt;/resources&gt;
+&lt;/module&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_apache_commons_fileupload_module_xml">Apache Commons Fileupload module.xml:</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;module xmlns="urn:jboss:module:1.1" name="org.apache.commons.fileupload"&gt;
+    &lt;resources&gt;
+        &lt;resource-root path="commons-fileupload-1.3.1.jar"/&gt;
+    &lt;/resources&gt;
+    &lt;dependencies&gt;
+ &lt;module name="javax.servlet.api" /&gt;
+ &lt;module name="org.apache.commons.io" /&gt;
+    &lt;/dependencies&gt;
+&lt;/module&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_apache_poi_module_xml">Apache Poi module.xml:</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;module xmlns="urn:jboss:module:1.1" name="org.apache.poi"&gt;
+    &lt;resources&gt;
+        &lt;resource-root path="poi-3.10-FINAL.jar"/&gt;
+    &lt;/resources&gt;
+&lt;/module&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_omnifaces_module_xml">Omnifaces module.xml:</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;module xmlns="urn:jboss:module:1.1" name="org.omnifaces"&gt;
+    &lt;resources&gt;
+        &lt;resource-root path="omnifaces-1.7.jar"/&gt;
+    &lt;/resources&gt;
+    &lt;dependencies&gt;
+        &lt;module name="javaee.api"/&gt;
+        &lt;module name="javax.api"/&gt;
+        &lt;module name="javax.faces.api" /&gt;
+    &lt;/dependencies&gt;
+&lt;/module&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_warning">Warning</h3>
+<div class="paragraph">
+<p>From my experience, a few Omnifaces features, like ViewParam and Highlight, won&#8217;t work when it&#8217;s included in your project as a JBoss module. I didn&#8217;t find a workaround for that yet, so if that happens to you just change Omnifaces dependency scope from provided to compile.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_primefaces_module_xml">Primefaces module.xml:</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;module xmlns="urn:jboss:module:1.1" name="org.primefaces"&gt;
+    &lt;dependencies&gt;
+  &lt;module name="javax.api" export="true" /&gt;
+        &lt;module name="javax.faces.api" export="true" /&gt;
+        &lt;module name="org.apache.commons.fileupload" export="true" /&gt;
+    &lt;/dependencies&gt;
+    &lt;resources&gt;
+        &lt;resource-root path="primefaces-5.0.jar"/&gt;
+    &lt;/resources&gt;
+&lt;/module&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2_change_the_maven_dependency_scope_from_compile_to_provided">2. Change the Maven Dependency Scope from Compile to Provided</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>pom.xml:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">        &lt;dependency&gt;
+            &lt;groupId&gt;com.itextpdf&lt;/groupId&gt;
+            &lt;artifactId&gt;itextpdf&lt;/artifactId&gt;
+            &lt;version&gt;5.5.0&lt;/version&gt;
+            &lt;type&gt;jar&lt;/type&gt;
+            &lt;scope&gt;provided&lt;/scope&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.itextpdf&lt;/groupId&gt;
+            &lt;artifactId&gt;itext-xtra&lt;/artifactId&gt;
+            &lt;version&gt;5.5.0&lt;/version&gt;
+            &lt;type&gt;jar&lt;/type&gt;
+            &lt;scope&gt;provided&lt;/scope&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;rome&lt;/groupId&gt;
+            &lt;artifactId&gt;rome&lt;/artifactId&gt;
+            &lt;version&gt;1.0&lt;/version&gt;
+            &lt;scope&gt;provided&lt;/scope&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;nl.captcha&lt;/groupId&gt;
+            &lt;artifactId&gt;simplecaptcha&lt;/artifactId&gt;
+            &lt;version&gt;1.2.1&lt;/version&gt;
+            &lt;type&gt;jar&lt;/type&gt;
+            &lt;scope&gt;provided&lt;/scope&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.apache.poi&lt;/groupId&gt;
+            &lt;artifactId&gt;poi&lt;/artifactId&gt;
+            &lt;version&gt;3.10-FINAL&lt;/version&gt;
+            &lt;scope&gt;provided&lt;/scope&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.omnifaces&lt;/groupId&gt;
+            &lt;artifactId&gt;omnifaces&lt;/artifactId&gt;
+            &lt;version&gt;1.7&lt;/version&gt;
+            &lt;scope&gt;provided&lt;/scope&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.primefaces&lt;/groupId&gt;
+            &lt;artifactId&gt;primefaces&lt;/artifactId&gt;
+            &lt;version&gt;5.0&lt;/version&gt;
+            &lt;scope&gt;provided&lt;/scope&gt;
+        &lt;/dependency&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_3_enable_the_dependencies_in_your_project">3. Enable the dependencies in your project</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>There are two ways (and a mix of both):</p>
+</div>
+<div class="paragraph">
+<p>Add the jboss-deployment-structure.xml to your project&#8217;s WEB-INF folder:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;jboss-deployment-structure&gt;
+    &lt;deployment&gt;
+        &lt;dependencies&gt;
+            &lt;module name="nl.captcha.simplecaptcha"/&gt;
+            &lt;module name="com.itextpdf.itextpdf"/&gt;
+            &lt;module name="com.rome"/&gt;
+            &lt;module name="org.apache.poi"/&gt;
+            &lt;module name="org.omnifaces" meta-inf="export"/&gt;
+            &lt;module name="org.primefaces" meta-inf="export"/&gt;
+        &lt;/dependencies&gt;
+        &lt;resources&gt;
+            &lt;resource-root path="."/&gt;
+        &lt;/resources&gt;
+    &lt;/deployment&gt;
+&lt;/jboss-deployment-structure&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Or instead add the following code to your standalone or domain.xml to enable those dependencies globally to every deployed application:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;subsystem xmlns="urn:jboss:domain:ee:1.0" &gt;
+  &lt;global-modules&gt;
+    &lt;module name="nl.captcha.simplecaptcha"/&gt;
+    &lt;module name="com.itextpdf.itextpdf"/&gt;
+    &lt;module name="com.rome"/&gt;
+  &lt;/global-modules&gt;
+&lt;/subsystem&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The disadvantage of global-modules is that you can&#8217;t use the meta-inf property. So if you need to export it (as in omnifaces and primefaces case), you&#8217;ll be forced to use the jboss-deployment-structure.xml file.</p>
+</div>
+<div class="paragraph">
+<p>You can also use both methods. Add the libraries used by all your projects as global modules and the less used ones in the jboss-deployment-structure.xml.</p>
+</div>
+<div class="paragraph">
+<p>I hope those examples help you to set up any other library you need. If not, please comment this post, then I&#8217;ll try to help you.</p>
+</div>
+</div>
+</div>
+        </section>
+
+        <footer class="post-footer">
+
+
+            <figure class="author-image">
+                <a class="img" href="" style="background-image: url(https://avatars.githubusercontent.com/u/832674?v=3)"><span class="hidden">Humberto Ferreira da Luz Junior's Picture</span></a>
+            </figure>
+
+            <section class="author">
+                <h4><a href="">Humberto Ferreira da Luz Junior</a></h4>
+
+                    <p>Read <a href="">more posts</a> by this author.</p>
+                <div class="author-meta">
+                    
+                    
+                </div>
+            </section>
+
+
+            <section class="share">
+                <h4>Share this post</h4>
+                <a class="icon-twitter" href="https://twitter.com/share?text=Load%20itextpdf%2C%20simplecaptcha%2C%20apache%20poi%2C%20rome%2C%20omnifaces%20and%20primefaces%20as%20JBoss%20AS%2FWildfly%20Modules&amp;url=https://hfluz.github.io/2015/11/27/Load-itextpdf-simplecaptcha-apache-poi-rome-omnifaces-and-primefaces-as-JBoss-ASWildfly-Modules.html"
+                    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <span class="hidden">Twitter</span>
+                </a>
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://hfluz.github.io/2015/11/27/Load-itextpdf-simplecaptcha-apache-poi-rome-omnifaces-and-primefaces-as-JBoss-ASWildfly-Modules.html"
+                    onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <span class="hidden">Facebook</span>
+                </a>
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=https://hfluz.github.io/2015/11/27/Load-itextpdf-simplecaptcha-apache-poi-rome-omnifaces-and-primefaces-as-JBoss-ASWildfly-Modules.html"
+                   onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <span class="hidden">Google+</span>
+                </a>
+            </section>
+
+        </footer>
+
+
+    </article>
+
+</main>
+
+
+
+    <footer class="site-footer clearfix">
+        <section class="copyright"><a href="https://hfluz.github.io">hfluz</a> &copy; 2015</section>
+        <section class="poweredby">Proudly published with <a href="http://hubpress.io">HubPress</a></section>
+    </footer>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js?v="></script> <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.min.js?v="></script> <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js?v="></script> 
+      <script type="text/javascript">
+        jQuery( document ).ready(function() {
+          // change date with ago
+          jQuery('ago.ago').each(function(){
+            var element = jQuery(this).parent();
+            element.html( moment(element.text()).fromNow());
+          });
+        });
+
+        hljs.initHighlightingOnLoad();      
+      </script>
+
+    <script type="text/javascript" src="//hfluz.github.io/themes/Casper/assets/js/jquery.fitvids.js?v=1.0.0"></script>
+    <script type="text/javascript" src="//hfluz.github.io/themes/Casper/assets/js/index.js?v=1.0.0"></script>
+
+</body>
+</html>
