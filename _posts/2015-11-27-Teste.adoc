@@ -1,0 +1,22 @@
+= Teste
+
+_Itálico_
+
+*Negrito*
+
+`plain text`
+
+[source,xml]
+<?xml version="1.0" encoding="UTF-8"?>
+<module xmlns="urn:jboss:module:1.1" name="com.rome">
+    <resources>
+        <resource-root path="rome-1.0.jar"/>
+    </resources>
+    <dependencies>
+        <module name="org.jdom" export="true"/>
+        <module name="javax.api" export="true"/>
+    </dependencies>
+</module>
+
+[source,ruby]
+puts "Hello, World!"
