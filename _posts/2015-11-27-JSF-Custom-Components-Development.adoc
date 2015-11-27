@@ -1,0 +1,14 @@
+= JSF Custom Components Development
+
+Here at the State University of Londrina IT department we adopted JSF as the presentation layer of our Java EE apps.
+Since I deal with JSF every day, I'm always interested to deepen my knowledge, be it by reading books or reading the https://www.reddit.com/r/java[Java subreddit].
+
+For convenience of our developers I already customized some Primefaces components (I keep our own https://github.com/hfluz/primefaces[fork] with those customizations) and in a few cases I developed simple custom components to solve issues because it seemed to be the cleaner approach and I found very interesting to learn how JSF components work under the hood.
+
+Earlier this year I created a https://github.com/hfluz/FoundationFaces[github] repo to develop a component library based on http://foundation.zurb.com/[Zurb Foundation] (just like http://bootsfaces.net/[Bootsfaces] did with http://getbootstrap.com/[Boostrap]). 
+
+I began creating a few http://foundation.zurb.com/sites.html[Foundation for Sites] components. Then I found out there was also the http://foundation.zurb.com/apps.html[Foundation for Apps] (which uses AngularJS). At first it seemed the latter one had more to do with JSF goals, but after each created component I felt there was some overlap between Angular and JSF custom components, which made me choose the Foundation for Sites as the base for my component library.
+
+There isn't a lot of detailed resources about component development available. The https://docs.oracle.com/javaee/7/tutorial/jsf-custom.htm#BNAVG[Java EE 7 Tutorial] was a good start to understand the main concepts and also to learn a few good practices. The https://github.com/primefaces/primefaces[Primefaces] and https://github.com/TheCoder4eu/BootsFaces-OSP[Bootsfaces] source code also helped a lot to understand more advanced concepts.
+
+I intend to keep this blog updated in order to document my progress and also to help those who want another resource to understand how to develop custom components or how to change existing components to their needs. Furthermore my work might provide another responsive component library to the JSF community.
