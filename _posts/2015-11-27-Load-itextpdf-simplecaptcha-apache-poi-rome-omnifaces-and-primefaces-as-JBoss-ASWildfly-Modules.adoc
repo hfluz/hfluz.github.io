@@ -60,7 +60,6 @@ In order to reduce your applications package size, JBoss AS/Wildfly allows you t
     <resources>
         <resource-root path="rome-1.0.jar"/>
     </resources>
-
     <dependencies>
         <module name="org.jdom" export="true"/>
         <module name="javax.api" export="true"/>
