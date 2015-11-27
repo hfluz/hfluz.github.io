@@ -1,5 +1,7 @@
 = JSF Custom Components Development
 
+:hp-tags: JSF, FoundationFaces
+
 Here at the State University of Londrina IT department we adopted JSF as the presentation layer of our Java EE apps.
 Since I deal with JSF every day, I'm always interested to deepen my knowledge, be it by reading books or reading the https://www.reddit.com/r/java[Java subreddit].
 
