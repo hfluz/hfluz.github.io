@@ -1,0 +1,38 @@
+= Button
+
+According to https://javaserverfaces.java.net/docs/2.2/[JSF 2.2 renderkit documentation] `h:button` documentation:
+
+ Render an HTML "input" element of type "button". The value of the component is rendered as the button text and the outcome of the component is used to determine the target URL which is activated by onclick. If "image" attribute is specified, render it as the value of the "src" attribute after passing it to the getResourceURL() method of the ViewHandler for this application, and passing the result through the encodeResourceURL() method of the ExternalContext.
+
+
+We can extend `HtmlOutcomeTargetButton`, so we don't have to start from scratch. 
+
+This is our component class:
+
+[source, java]
+@ResourceDependencies({
+    @ResourceDependency(library = "foundation", name = "css/foundation.min.css")//,
+})
+@FacesComponent(createTag = true, namespace = "http://foundation.faces.com/taglib",
+        tagName = "button")
+public class ButtonUI extends HtmlOutcomeTargetButton {
+   //code
+}
+
+The `@ResourceDependencies` annotation defines which resources this component requires to be rendered.
+
+The `@FacesComponent` annotation defines the name of our annotation and also which namespace it uses.
+ 
+[NOTE]
+====
+Since JSF 2 we can define the component metadata through annotations instead of defining them through the `taglib.xml` file, however most IDEs won't be able to identify its attributes for auto-completion.
+====
+
+To make it look like http://foundation.zurb.com/sites/docs/button.html[Foundation Buttons] we have to add a few attributes to our `ButtonUI`:
+
+* sizing
+* expanded
+* coloring
+* hollow
+* disabled
+
