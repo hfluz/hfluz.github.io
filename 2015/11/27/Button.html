@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title>Button - hfluz</title>
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta name="description" content="">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Button">
+    <meta name="twitter:description" content="">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Button">
+    <meta property="og:description" content="">
+
+    <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
+    <link href="/apple-touch-icon-precomposed.png" rel="apple-touch-icon">
+
+    <link rel="stylesheet" type="text/css" href="//hfluz.github.io/themes/uno/assets/css/uno.css?v=1.0.0" />
+
+    <link rel="canonical" href="https://hfluz.github.io/2015/11/27/Button.html" />
+    
+    <meta property="og:site_name" content="hfluz" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Button" />
+    <meta property="og:description" content="According to JSF 2.2 renderkit documentation h:button documentation: Render an HTML &quot;input&quot; element of type &quot;button&quot;. The value of the component is rendered as the button text and the outcome of the component is used to determine the..." />
+    <meta property="og:url" content="https://hfluz.github.io/2015/11/27/Button.html" />
+    <meta property="article:published_time" content="2015-11-27T02:00:00.000Z" />
+    <meta property="article:modified_time" content="2015-11-28T15:41:39.818Z" />
+    
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Button" />
+    <meta name="twitter:description" content="According to JSF 2.2 renderkit documentation h:button documentation: Render an HTML &quot;input&quot; element of type &quot;button&quot;. The value of the component is rendered as the button text and the outcome of the component is used to determine the..." />
+    <meta name="twitter:url" content="https://hfluz.github.io/2015/11/27/Button.html" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "publisher": "hfluz",
+    "author": {
+        "@type": "Person",
+        "name": "Humberto Ferreira da Luz Junior",
+        "image": "https://avatars.githubusercontent.com/u/832674?v=3",
+        "url": "undefined/author/undefined",
+        "sameAs": null
+    },
+    "headline": "Button",
+    "url": "https://hfluz.github.io/2015/11/27/Button.html",
+    "datePublished": "2015-11-27T02:00:00.000Z",
+    "dateModified": "2015-11-28T15:41:39.818Z",
+    "description": "According to JSF 2.2 renderkit documentation h:button documentation: Render an HTML &quot;input&quot; element of type &quot;button&quot;. The value of the component is rendered as the button text and the outcome of the component is used to determine the..."
+}
+    </script>
+
+    <meta name="generator" content="Ghost ?" />
+    <link rel="alternate" type="application/rss+xml" title="hfluz" href="https://hfluz.github.io/rss" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/default.min.css">
+
+</head>
+<body class="post-template no-js">
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    <header class="panel-cover panel-cover--collapsed " >
+      <div class="panel-main">
+    
+        <div class="panel-main__inner panel-inverted">
+        <div class="panel-main__content">
+    
+            <h1 class="panel-cover__title panel-title"><a href="https://hfluz.github.io" title="link to homepage for hfluz">hfluz</a></h1>
+            <hr class="panel-cover__divider" />
+            <p class="panel-cover__description">Just a blog about Java EE and linux with stories and experiences I face everyday as a software developer.</p>
+            <hr class="panel-cover__divider panel-cover__divider--secondary" />
+    
+            <div class="navigation-wrapper">
+    
+              <nav class="cover-navigation cover-navigation--primary">
+                <ul class="navigation">
+                  <li class="navigation__item"><a href="https://hfluz.github.io/#blog" title="link to hfluz blog" class="blog-button">Blog</a></li>
+                </ul>
+              </nav>
+    
+              
+              
+              <nav class="cover-navigation navigation--social">
+                <ul class="navigation">
+              
+              
+              
+              
+                  <!-- Github -->
+                  <li class="navigation__item">
+                    <a href="https://github.com/hfluz/" title="Github account">
+                      <i class='icon icon-social-github'></i>
+                      <span class="label">Github</span>
+                    </a>
+                  </li>
+                  </li>
+              
+              
+              
+              
+                  <!-- LinkedIn -->
+                  <li class="navigation__item">
+                    <a href="https://br.linkedin.com/in/hfluz" title="LinkedIn account">
+                      <i class='icon icon-social-linkedin'></i>
+                      <span class="label">LinkedIn</span>
+                    </a>
+                  </li>
+              
+                  <!-- Email -->
+                  <li class="navigation__item">
+                    <a href="mailto:hfluz@uel.br" title="Email hfluz@uel.br">
+                      <i class='icon icon-mail'></i>
+                      <span class="label">Email</span>
+                    </a>
+                  </li>
+              
+                </ul>
+              </nav>
+              
+    
+            </div>
+    
+          </div>
+    
+        </div>
+    
+        <div class="panel-cover--overlay"></div>
+      </div>
+    </header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner">
+            
+
+  <article class="post-container post-container--single">
+
+    <header class="post-header">
+      <div class="post-meta">
+        <time datetime="27 Nov 2015" class="post-meta__date date">27 Nov 2015</time> &#8226; <span class="post-meta__tags tags"></span>
+        <span class="post-meta__author author"><img src="https://avatars.githubusercontent.com/u/832674?v=3" alt="profile image for Humberto Ferreira da Luz Junior" class="avatar post-meta__avatar" /> by Humberto Ferreira da Luz Junior</span>
+      </div>
+      <h1 class="post-title">Button</h1>
+    </header>
+
+    <section class="post">
+      <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>According to <a href="https://javaserverfaces.java.net/docs/2.2/">JSF 2.2 renderkit documentation</a> <code>h:button</code> documentation:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Render an HTML "input" element of type "button". The value of the component is rendered as the button text and the outcome of the component is used to determine the target URL which is activated by onclick. If "image" attribute is specified, render it as the value of the "src" attribute after passing it to the getResourceURL() method of the ViewHandler for this application, and passing the result through the encodeResourceURL() method of the ExternalContext.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We can extend <code>HtmlOutcomeTargetButton</code>, so we don&#8217;t have to start from scratch.</p>
+</div>
+<div class="paragraph">
+<p>This is our component class:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@ResourceDependencies({
+    @ResourceDependency(library = "foundation", name = "css/foundation.min.css")
+})
+@FacesComponent(createTag = true, namespace = "http://foundation.faces.com/taglib",
+        tagName = "button")
+public class ButtonUI extends HtmlOutcomeTargetButton {
+   //code
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>@ResourceDependencies</code> annotation defines which resources this component requires to be rendered.</p>
+</div>
+<div class="paragraph">
+<p>The <code>@FacesComponent</code> annotation defines the name of our component tag and also which namespace it uses.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Since JSF 2 we can define the component metadata through annotations instead of defining them through the <code>taglib.xml</code> file, however most IDEs won&#8217;t be able to identify its attributes for auto-completion.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>To make it look like <a href="http://foundation.zurb.com/sites/docs/button.html">Foundation Buttons</a> we have to add a few attributes to our <code>ButtonUI</code>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>sizing: change the button size</p>
+</li>
+<li>
+<p>expanded: expand the button to fill the whole row</p>
+</li>
+<li>
+<p>coloring: change the button color related to a meaning</p>
+</li>
+<li>
+<p>hollow: invert the colors of the background/border and the font</p>
+</li>
+<li>
+<p>disabled: add opacity and prevent cursor events</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Since all the attributes are related to the <code>styleClass</code>, I don&#8217;t need to reimplement the <code>HtmlOutcomeTargetButton</code> enconding methods, all I have to do is to change the <code>styleClass</code> value:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">    @Override
+    public void encodeBegin(FacesContext context) throws IOException {
+        ResponseWriter writer = context.getResponseWriter();
+        this.setStyleClass(buildStyleClass());
+        super.encodeBegin(context);
+    }
+    public String buildStyleClass() {
+        StringJoiner styleClass = new StringJoiner(" ");
+        styleClass.add("button");
+        if (getStyleClass() != null) {
+            styleClass.add(getStyleClass());
+        }
+        if (getSizing() != null &amp;&amp; getSizing().matches("(.*)(tiny|small|normal|large)(.*)")) {
+            styleClass.add(getSizing());
+        }
+        if (isExpanded()) {
+            styleClass.add("expanded");
+        }
+        if (getColoring() != null &amp;&amp; getColoring().matches("(.*)(secondary|success|alert|warning)(.*)")) {
+            styleClass.add(getColoring());
+        }
+        if (isHollow()) {
+            styleClass.add("hollow");
+        }
+        if (isDisabled()) {
+            styleClass.add("disabled");
+        }
+        return styleClass.toString();
+    }</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_let_s_try_our_component">Let&#8217;s try our component</h3>
+<div class="paragraph">
+<p>page.xhtml:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:fo="http://foundation.faces.com/taglib"&gt;
+    &lt;h:head&gt;
+        &lt;title&gt;Buttons&lt;/title&gt;
+    &lt;/h:head&gt;
+    &lt;h:body &gt;
+        &lt;h:form prependId="false"&gt;
+            &lt;fo:button outcome="page2.xhtml" value="Tiny" sizing="tiny"/&gt;
+            &lt;fo:button outcome="page2.xhtml" value="Small" sizing="small"/&gt;
+            &lt;fo:button outcome="page2.xhtml" value="Normal"/&gt;
+            &lt;fo:button outcome="page2.xhtml" value="Large" sizing="large"/&gt;
+            &lt;fo:button outcome="page2.xhtml" value="Expanded small" sizing="small" expanded="true"/&gt;
+            &lt;fo:button outcome="page2.xhtml" value="Expanded" expanded="true"/&gt;
+            &lt;fo:button outcome="page2.xhtml" value="Secondary" coloring="secondary"/&gt;
+            &lt;fo:button outcome="page2.xhtml" value="Success" coloring="success"/&gt;
+            &lt;fo:button outcome="page2.xhtml" value="Alert" coloring="alert"/&gt;
+            &lt;fo:button outcome="page2.xhtml" value="Warning" coloring="warning"/&gt;
+            &lt;fo:button outcome="page2.xhtml" value="Hollow Secondary" coloring="secondary" hollow="true"/&gt;
+            &lt;fo:button outcome="page2.xhtml" value="Hollow Success" coloring="success" hollow="true"/&gt;
+            &lt;fo:button outcome="page2.xhtml" value="Hollow" hollow="true"/&gt;
+            &lt;fo:button outcome="page2.xhtml" value="Hollow Alert" coloring="alert" hollow="true"/&gt;
+            &lt;fo:button outcome="page2.xhtml" value="Hollow Warning" coloring="warning" hollow="true"/&gt;
+            &lt;fo:button outcome="page2.xhtml" value="Disabled" disabled="true" /&gt;
+        &lt;/h:form&gt;
+    &lt;/h:body&gt;
+&lt;/html&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This is the output:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="http://s30.postimg.org/s9qz7vim9/foundation_button.png" alt="Foundation Buttons">
+</div>
+</div>
+<div class="paragraph">
+<p>The only button that wasn&#8217;t displayed as expected is the disabled one because it&#8217;s almost invisible. Let&#8217;s see what happened.</p>
+</div>
+<div class="paragraph">
+<p>According to foundation documentation, a disabled button should be rendered like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;a class="disabled button" href="#"&gt;Disabled Button&lt;/a&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>However, our disabled button received one unexpected attribute:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;input value="Disabled" class="button disabled" disabled="disabled" type="button"&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>disabled</code> attribute is used by JSF to disable the button, but that way we are applying 2 differente disabled styles simultaneosly:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-css" data-lang="css">button.disabled {
+    opacity: 0.25;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+input:disabled, input[readonly], textarea:disabled, textarea[readonly] {
+    background-color: #E6E6E6;
+    cursor: default;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The simplest solution is to set <code>disabled</code> to false after we have already built our styleClass attribute and before it&#8217;s used by <code>HtmlOutcomeTargetButton</code> <code>encodeBegin</code> method:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">    @Override
+    public void encodeBegin(FacesContext context) throws IOException {
+        ResponseWriter writer = context.getResponseWriter();
+        this.setStyleClass(buildStyleClass());
+        setDisabled(false);
+        super.encodeBegin(context);
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now our disable button is rendered how it should:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="http://s18.postimg.org/4b8idcvat/foundation_disabled_button.png" alt="Foundation Disabled Button">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="__code_buttonui_code_final_source_code"><code>ButtonUI</code> final source code:</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">package org.foundation.faces.components;
+import java.io.IOException;
+import java.util.StringJoiner;
+import javax.faces.application.ResourceDependencies;
+import javax.faces.application.ResourceDependency;
+import javax.faces.component.FacesComponent;
+import javax.faces.component.html.HtmlOutcomeTargetButton;
+import javax.faces.context.FacesContext;
+import javax.faces.context.ResponseWriter;
+@ResourceDependencies({
+    @ResourceDependency(library = "foundation", name = "css/foundation.min.css")
+})
+@FacesComponent(createTag = true, namespace = "http://foundation.faces.com/taglib",
+        tagName = "button")
+public class ButtonUI extends HtmlOutcomeTargetButton {
+    enum PropertyKeys {
+        sizing, expanded, coloring, hollow, disabled;
+    }
+    @Override
+    public void encodeBegin(FacesContext context) throws IOException {
+        ResponseWriter writer = context.getResponseWriter();
+        this.setStyleClass(buildStyleClass());
+        setDisabled(false);
+        super.encodeBegin(context);
+    }
+    public String buildStyleClass() {
+        StringJoiner styleClass = new StringJoiner(" ");
+        styleClass.add("button");
+        if (getStyleClass() != null) {
+            styleClass.add(getStyleClass());
+        }
+        if (getSizing() != null &amp;&amp; getSizing().matches("(.*)(tiny|small|normal|large)(.*)")) {
+            styleClass.add(getSizing());
+        }
+        if (isExpanded()) {
+            styleClass.add("expanded");
+        }
+        if (getColoring() != null &amp;&amp; getColoring().matches("(.*)(secondary|success|alert|warning)(.*)")) {
+            styleClass.add(getColoring());
+        }
+        if (isHollow()) {
+            styleClass.add("hollow");
+        }
+        if (isDisabled()) {
+            styleClass.add("disabled");
+        }
+        return styleClass.toString();
+    }
+    public String getSizing() {
+        return (String) getStateHelper().eval(PropertyKeys.sizing, null);
+    }
+    public void setSizing(String sizing) {
+        getStateHelper().put(PropertyKeys.sizing, sizing);
+    }
+    public Boolean isExpanded() {
+        return (Boolean) getStateHelper().eval(PropertyKeys.expanded, Boolean.FALSE);
+    }
+    public void setExpanded(Boolean expanded) {
+        getStateHelper().put(PropertyKeys.expanded, expanded);
+    }
+    public String getColoring() {
+        return (String) getStateHelper().eval(PropertyKeys.coloring, null);
+    }
+    public void setColoring(String coloring) {
+        getStateHelper().put(PropertyKeys.coloring, coloring);
+    }
+    public Boolean isHollow() {
+        return (Boolean) getStateHelper().eval(PropertyKeys.hollow, Boolean.FALSE);
+    }
+    public void setHollow(Boolean hollow) {
+        getStateHelper().put(PropertyKeys.hollow, hollow);
+    }
+    public boolean isDisabled() {
+        return (Boolean) getStateHelper().eval(PropertyKeys.disabled, false);
+    }
+    public void setDisabled(boolean disabled) {
+        getStateHelper().put(PropertyKeys.disabled, disabled);
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+    </section>
+
+  </article>
+
+  
+  <section class="post-comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'hfluzgithubio'; // required: replace example with your forum shortname
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </section>
+  
+
+
+
+            <footer class="footer">
+                <span class="footer__copyright">&copy; 2015. All rights reserved.</span>
+                <span class="footer__copyright"><a href="http://uno.daleanthony.com" title="link to page for Uno Ghost theme">Uno theme</a> by <a href="http://daleanthony.com" title="link to website for Dale-Anthony">Dale-Anthony</a></span>
+                <span class="footer__copyright">Proudly published with <a href="http://hubpress.io" title="link to Hubpress website">Hubpress</a></span>
+            </footer>
+        </div>
+    </div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js?v="></script> <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.min.js?v="></script> <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js?v="></script> 
+      <script type="text/javascript">
+        jQuery( document ).ready(function() {
+          // change date with ago
+          jQuery('ago.ago').each(function(){
+            var element = jQuery(this).parent();
+            element.html( moment(element.text()).fromNow());
+          });
+        });
+
+        hljs.initHighlightingOnLoad();      
+      </script>
+
+    <script type="text/javascript" src="//hfluz.github.io/themes/uno/assets/js/main.js?v=1.0.0"></script>
+    
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-31226076-2', 'auto');
+    ga('send', 'pageview');
+
+    </script>
+
+</body>
+</html>
