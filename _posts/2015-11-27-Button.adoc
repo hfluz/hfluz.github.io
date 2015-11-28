@@ -11,7 +11,7 @@ This is our component class:
 
 [source, java]
 @ResourceDependencies({
-    @ResourceDependency(library = "foundation", name = "css/foundation.min.css")//,
+    @ResourceDependency(library = "foundation", name = "css/foundation.min.css")
 })
 @FacesComponent(createTag = true, namespace = "http://foundation.faces.com/taglib",
         tagName = "button")
@@ -21,7 +21,7 @@ public class ButtonUI extends HtmlOutcomeTargetButton {
 
 The `@ResourceDependencies` annotation defines which resources this component requires to be rendered.
 
-The `@FacesComponent` annotation defines the name of our annotation and also which namespace it uses.
+The `@FacesComponent` annotation defines the name of our component tag and also which namespace it uses.
  
 [NOTE]
 ====
@@ -30,9 +30,204 @@ Since JSF 2 we can define the component metadata through annotations instead of 
 
 To make it look like http://foundation.zurb.com/sites/docs/button.html[Foundation Buttons] we have to add a few attributes to our `ButtonUI`:
 
-* sizing
-* expanded
-* coloring
-* hollow
-* disabled
+* sizing: change the button size
+* expanded: expand the button to fill the whole row
+* coloring: change the button color related to a meaning
+* hollow: invert the colors of the background/border and the font
+* disabled: add opacity and prevent cursor events
 
+Since all the attributes are related to the `styleClass`, I don't need to reimplement the `HtmlOutcomeTargetButton` enconding methods, all I have to do is to change the `styleClass` value:
+
+[source,java]
+    @Override
+    public void encodeBegin(FacesContext context) throws IOException {
+        ResponseWriter writer = context.getResponseWriter();
+        this.setStyleClass(buildStyleClass());
+        super.encodeBegin(context);
+    }
+    public String buildStyleClass() {
+        StringJoiner styleClass = new StringJoiner(" ");
+        styleClass.add("button");
+        if (getStyleClass() != null) {
+            styleClass.add(getStyleClass());
+        }
+        if (getSizing() != null && getSizing().matches("(.*)(tiny|small|normal|large)(.*)")) {
+            styleClass.add(getSizing());
+        }
+        if (isExpanded()) {
+            styleClass.add("expanded");
+        }
+        if (getColoring() != null && getColoring().matches("(.*)(secondary|success|alert|warning)(.*)")) {
+            styleClass.add(getColoring());
+        }
+        if (isHollow()) {
+            styleClass.add("hollow");
+        }
+        if (isDisabled()) {
+            styleClass.add("disabled");
+        }
+        return styleClass.toString();
+    }
+
+
+=== Let's try our component
+
+page.xhtml:
+
+[source,xml]
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:fo="http://foundation.faces.com/taglib">
+    <h:head>
+        <title>Buttons</title>
+    </h:head>
+    <h:body >
+        <h:form prependId="false">
+            <fo:button outcome="page2.xhtml" value="Tiny" sizing="tiny"/>
+            <fo:button outcome="page2.xhtml" value="Small" sizing="small"/>
+            <fo:button outcome="page2.xhtml" value="Normal"/>
+            <fo:button outcome="page2.xhtml" value="Large" sizing="large"/>
+            <fo:button outcome="page2.xhtml" value="Expanded small" sizing="small" expanded="true"/>
+            <fo:button outcome="page2.xhtml" value="Expanded" expanded="true"/>
+            <fo:button outcome="page2.xhtml" value="Secondary" coloring="secondary"/>
+            <fo:button outcome="page2.xhtml" value="Success" coloring="success"/>
+            <fo:button outcome="page2.xhtml" value="Alert" coloring="alert"/>
+            <fo:button outcome="page2.xhtml" value="Warning" coloring="warning"/>
+            <fo:button outcome="page2.xhtml" value="Hollow Secondary" coloring="secondary" hollow="true"/>
+            <fo:button outcome="page2.xhtml" value="Hollow Success" coloring="success" hollow="true"/>
+            <fo:button outcome="page2.xhtml" value="Hollow" hollow="true"/>
+            <fo:button outcome="page2.xhtml" value="Hollow Alert" coloring="alert" hollow="true"/>
+            <fo:button outcome="page2.xhtml" value="Hollow Warning" coloring="warning" hollow="true"/>
+            <fo:button outcome="page2.xhtml" value="Disabled" disabled="true" />
+        </h:form>
+    </h:body>
+</html>
+
+            
+This is the output:
+
+image::http://s30.postimg.org/s9qz7vim9/foundation_button.png[Foundation Buttons]
+
+The only button that wasn't displayed as expected is the disabled one because it's almost invisible. Let's see what happened.
+
+According to foundation documentation, a disabled button should be rendered like this:
+
+[source,xml]
+<a class="disabled button" href="#">Disabled Button</a>
+
+However, our disabled button received one unexpected attribute:
+
+[source,xml]
+<input value="Disabled" class="button disabled" disabled="disabled" type="button">
+
+The `disabled` attribute is used by JSF to disable the button, but that way we are applying 2 differente disabled styles simultaneosly:
+
+[source,css]
+button.disabled {
+    opacity: 0.25;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+input:disabled, input[readonly], textarea:disabled, textarea[readonly] {
+    background-color: #E6E6E6;
+    cursor: default;
+}
+
+The simplest solution is to set `disabled` to false after we have already built our styleClass attribute and before it's used by `HtmlOutcomeTargetButton` `encodeBegin` method:
+
+[source,java]
+    @Override
+    public void encodeBegin(FacesContext context) throws IOException {
+        ResponseWriter writer = context.getResponseWriter();
+        this.setStyleClass(buildStyleClass());
+        setDisabled(false);
+        super.encodeBegin(context);
+    }
+    
+Now our disable button is rendered how it should:
+
+image::http://s18.postimg.org/4b8idcvat/foundation_disabled_button.png[Foundation Disabled Button]
+
+
+=== `ButtonUI` final source code:
+
+[source,java]
+package org.foundation.faces.components;
+import java.io.IOException;
+import java.util.StringJoiner;
+import javax.faces.application.ResourceDependencies;
+import javax.faces.application.ResourceDependency;
+import javax.faces.component.FacesComponent;
+import javax.faces.component.html.HtmlOutcomeTargetButton;
+import javax.faces.context.FacesContext;
+import javax.faces.context.ResponseWriter;
+@ResourceDependencies({
+    @ResourceDependency(library = "foundation", name = "css/foundation.min.css")
+})
+@FacesComponent(createTag = true, namespace = "http://foundation.faces.com/taglib",
+        tagName = "button")
+public class ButtonUI extends HtmlOutcomeTargetButton {
+    enum PropertyKeys {
+        sizing, expanded, coloring, hollow, disabled;
+    }
+    @Override
+    public void encodeBegin(FacesContext context) throws IOException {
+        ResponseWriter writer = context.getResponseWriter();
+        this.setStyleClass(buildStyleClass());
+        setDisabled(false);
+        super.encodeBegin(context);
+    }
+    public String buildStyleClass() {
+        StringJoiner styleClass = new StringJoiner(" ");
+        styleClass.add("button");
+        if (getStyleClass() != null) {
+            styleClass.add(getStyleClass());
+        }
+        if (getSizing() != null && getSizing().matches("(.*)(tiny|small|normal|large)(.*)")) {
+            styleClass.add(getSizing());
+        }
+        if (isExpanded()) {
+            styleClass.add("expanded");
+        }
+        if (getColoring() != null && getColoring().matches("(.*)(secondary|success|alert|warning)(.*)")) {
+            styleClass.add(getColoring());
+        }
+        if (isHollow()) {
+            styleClass.add("hollow");
+        }
+        if (isDisabled()) {
+            styleClass.add("disabled");
+        }
+        return styleClass.toString();
+    }
+    public String getSizing() {
+        return (String) getStateHelper().eval(PropertyKeys.sizing, null);
+    }
+    public void setSizing(String sizing) {
+        getStateHelper().put(PropertyKeys.sizing, sizing);
+    }
+    public Boolean isExpanded() {
+        return (Boolean) getStateHelper().eval(PropertyKeys.expanded, Boolean.FALSE);
+    }
+    public void setExpanded(Boolean expanded) {
+        getStateHelper().put(PropertyKeys.expanded, expanded);
+    }
+    public String getColoring() {
+        return (String) getStateHelper().eval(PropertyKeys.coloring, null);
+    }
+    public void setColoring(String coloring) {
+        getStateHelper().put(PropertyKeys.coloring, coloring);
+    }
+    public Boolean isHollow() {
+        return (Boolean) getStateHelper().eval(PropertyKeys.hollow, Boolean.FALSE);
+    }
+    public void setHollow(Boolean hollow) {
+        getStateHelper().put(PropertyKeys.hollow, hollow);
+    }
+    public boolean isDisabled() {
+        return (Boolean) getStateHelper().eval(PropertyKeys.disabled, false);
+    }
+    public void setDisabled(boolean disabled) {
+        getStateHelper().put(PropertyKeys.disabled, disabled);
+    }
+}
