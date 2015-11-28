@@ -1,4 +1,4 @@
-= Button
+= FoundationFaces Button
 
 According to https://javaserverfaces.java.net/docs/2.2/[JSF 2.2 renderkit documentation] `h:button` documentation:
 
