@@ -26,10 +26,7 @@ The `@ResourceDependencies` annotation defines which resources this component re
 
 The `@FacesComponent` annotation defines the name of our component tag and also which namespace it uses.
  
-[NOTE]
-====
-Since JSF 2 we can define the component metadata through annotations instead of defining them through the `taglib.xml` file, however most IDEs won't be able to identify its attributes for auto-completion.
-====
+NOTE: Since JSF 2 we can define the component metadata through annotations instead of defining them through the `taglib.xml` file, however most IDEs won't be able to identify its attributes for auto-completion.
 
 To make it look like http://foundation.zurb.com/sites/docs/button.html[Foundation Buttons] we have to add a few attributes to our `ButtonUI`:
 
